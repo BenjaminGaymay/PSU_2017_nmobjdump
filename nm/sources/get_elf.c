@@ -21,14 +21,14 @@ Elf64_Ehdr *get_elf_header(const char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd == OPEN_ERROR)
-		return (dprintf(2, "nm: '%s': No such file\n", file), NULL);
+		return (dprintf(2, "objdump: '%s': No such file\n", file), NULL);
 	datas = mmap(NULL, filesize(fd), PROT_READ, MAP_SHARED, fd, 0);
 	if (datas == MAP_FAILED)
 		return (perror("mmap"), NULL);
 	elf = (Elf64_Ehdr *)datas;
 	close(fd);
 	if (is_elf_file(elf) == false) {
-		dprintf(2, "nm: %s: File format not recognized\n", file);
+		dprintf(2, "objdump: %s: File format not recognized\n", file);
 		return (NULL);
 	}
 	return (elf);
@@ -36,10 +36,10 @@ Elf64_Ehdr *get_elf_header(const char *file)
 
 bool is_elf_file(const Elf64_Ehdr *ehdr)
 {
-	return (ehdr->e_ident[0] == ELFMAG0
-		&& ehdr->e_ident[1] == ELFMAG1
-		&& ehdr->e_ident[2] == ELFMAG2
-		&& ehdr->e_ident[3] == ELFMAG3);
+	return (ehdr->e_ident[0] == ELFMAG0 &&
+                ehdr->e_ident[1] == ELFMAG1 &&
+                ehdr->e_ident[2] == ELFMAG2 &&
+                ehdr->e_ident[3] == ELFMAG3);
 }
 
 static t_symbol *fill_symarr(const Elf64_Shdr *shdr, const Elf64_Sym *sym,

@@ -1,25 +1,21 @@
-##
-## EPITECH PROJECT, 2018
-## nmobjdump
-## File description:
-## objdump Makefile
-##
-
 NAME	= my_objdump
 
 CC	= gcc
 
 RM	= rm -f
 
-SRCS	=
+SRCS	= ./sources/my_objdump.c \
+	  ./sources/get_elf.c \
+	  ./sources/header.c \
 
-OBJS	= $(SRCS:=.o)
 
-CFLAGS = -I
+OBJS	= $(SRCS:.c=.o)
+
+CFLAGS = -I ./includes/
 CFLAGS += -W -Wall -Wextra
 
 all: $(NAME)
-	cp ../$(NAME)
+	cp $(NAME) ../
 
 $(NAME): $(OBJS)
 	 $(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
