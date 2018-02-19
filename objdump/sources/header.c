@@ -32,11 +32,9 @@ static const t_arch arch[] =
 int display_flags(const Elf64_Ehdr *elf, const Elf64_Shdr *shdr, char **str)
 {
     int flags = 0;
-    Elf64_Shdr *sec = NULL;
 
-    for (int i = 0; i < elf->e_shnum; ++i) {
-        sec = &shdr[i];
-        if (sec->sh_type == SHT_REL || sec->sh_type == SHT_RELA)
+    for (int i = 0; i < elf->e_shnum; i++) {
+        if (shdr[i].sh_type == SHT_REL || shdr[i].sh_type == SHT_RELA)
             flags |= HAS_RELOC;
     }
     if (elf->e_type == ET_EXEC) {

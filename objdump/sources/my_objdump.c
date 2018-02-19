@@ -7,7 +7,7 @@
 
 #include "my_objdump.h"
 
-static int start_objdump(const char *file_name, const int nb_files)
+static int start_objdump(const char *file_name)
 {
 	Elf64_Ehdr *elf;
 
@@ -16,8 +16,6 @@ static int start_objdump(const char *file_name, const int nb_files)
 		return (ERROR);
         show_header(elf, (Elf64_Shdr *)((void *)elf + elf->e_shoff), file_name);
 	show_sections(elf, (Elf64_Shdr *)((void *)elf + elf->e_shoff));
-	if (nb_files > 2)
-		printf("\n%s:\n", file_name);
 	return (SUCCESS);
 }
 
@@ -26,8 +24,8 @@ int main(const int ac, const char **av)
 	int ret = SUCCESS;
 
 	if (ac == 1)
-		return (start_objdump("a.out", ac));
+		return (start_objdump("a.out"));
 	for (int i = 1 ; av[i] ; i++)
-		ret = (start_objdump(av[i], ac) == ERROR ? ERROR : ret);
+		ret = (start_objdump(av[i]) == ERROR ? ERROR : ret);
 	return (ret);
 }

@@ -26,3 +26,4 @@
 bool is_elf_file(const Elf64_Ehdr *);
 Elf64_Ehdr *get_elf_header(const char *);
 int show_sections(const Elf64_Ehdr *, const Elf64_Shdr *);
+void show_header(const Elf64_Ehdr *, const Elf64_Shdr *, const char *);
