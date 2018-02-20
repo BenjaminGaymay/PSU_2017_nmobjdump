@@ -13,7 +13,7 @@ static int get_flags(const Elf64_Ehdr *elf, const Elf64_Shdr *shdr, char **str)
 {
     int flags = 0;
 
-    for (int i = 0; i < elf->e_shnum; i++) {
+    for (int i = 0 ; i < elf->e_shnum ; i++) {
         if (shdr[i].sh_type == SHT_REL || shdr[i].sh_type == SHT_RELA)
             flags |= HAS_RELOC;
     }
