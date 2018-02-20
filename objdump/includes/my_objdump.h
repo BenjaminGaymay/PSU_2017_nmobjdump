@@ -23,6 +23,11 @@
                              (type) != SHT_STRTAB && \
                              (type) != SHT_NOBITS)
 
+typedef struct s_machine {
+        uint16_t id;
+        const char *name;
+} t_machine;
+
 bool is_elf_file(const Elf64_Ehdr *);
 Elf64_Ehdr *get_elf_header(const char *);
 int show_sections(const Elf64_Ehdr *, const Elf64_Shdr *);

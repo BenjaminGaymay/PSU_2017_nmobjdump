@@ -8,7 +8,7 @@
 #include "my_objdump.h"
 #include <sys/mman.h>
 
-int filesize(int fd)
+static int filesize(int fd)
 {
 	return (lseek(fd, 0, SEEK_END));
 }
@@ -43,7 +43,7 @@ bool is_elf_file(const Elf64_Ehdr *elf)
 		elf->e_ident[3] == ELFMAG3);
 }
 
-void print_line_datas(const Elf64_Ehdr *elf, const Elf64_Shdr *shdr,
+static void print_line_datas(const Elf64_Ehdr *elf, const Elf64_Shdr *shdr,
 		      int i, int indent)
 {
 	unsigned char *data = (unsigned char *)elf + shdr[i].sh_offset + indent;

@@ -14,8 +14,7 @@ static char checktype_shdr(const Elf64_Sym *sym, const Elf64_Shdr *shdr)
 		{'R', SHT_PROGBITS, SHF_ALLOC},
 		{'D', SHT_PROGBITS, (SHF_ALLOC | SHF_WRITE)},
 		{'T', SHT_PROGBITS, (SHF_ALLOC | SHF_EXECINSTR)},
-		{'D', SHT_DYNAMIC, (SHF_ALLOC | SHF_EXECINSTR)},
-		{'\0'}
+		{'D', SHT_DYNAMIC, (SHF_ALLOC | SHF_EXECINSTR)}
 	};
 
 	for (int i = 0 ; arr[i].type ; i++) {
