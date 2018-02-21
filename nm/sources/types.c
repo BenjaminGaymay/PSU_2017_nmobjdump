@@ -25,14 +25,12 @@ static char checktype_shdr(const Elf64_Sym *sym, const Elf64_Shdr *shdr)
 	return (shdr[sym->st_shndx].sh_type == SHT_DYNAMIC ? 'D' : 't');
 }
 
-
 static char checktype_shndx(const Elf64_Sym *sym, const Elf64_Shdr *shdr)
 {
 	static t_type_info arr[] = {
 		{'U', SHN_UNDEF, SHN_UNDEF},
 		{'A', SHN_ABS, SHN_ABS},
-		{'C', SHN_COMMON, SHN_COMMON},
-		{'\0'}
+		{'C', SHN_COMMON, SHN_COMMON}
 	};
 
 	for (int i = 0 ; arr[i].type ; i++) {
@@ -48,7 +46,6 @@ static char checktype_info(const Elf64_Sym *sym, const Elf64_Shdr *shdr)
 		{'u', STB_GNU_UNIQUE, STB_GNU_UNIQUE},
 		{'W', STB_WEAK, STB_WEAK},
 		{'V', STB_WEAK, STT_OBJECT},
-		{'\0'}
 	};
 
 	for (int i = 0 ; arr[i].type ; i++) {
@@ -58,7 +55,6 @@ static char checktype_info(const Elf64_Sym *sym, const Elf64_Shdr *shdr)
 	}
 	return (checktype_shndx(sym, shdr));
 }
-
 
 char get_symtype(const Elf64_Sym *sym, const Elf64_Shdr *shdr)
 {

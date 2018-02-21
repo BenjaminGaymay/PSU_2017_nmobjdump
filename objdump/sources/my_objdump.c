@@ -14,8 +14,8 @@ static int start_objdump(const char *file)
 	elf = get_elf_header(file);
 	if (elf == NULL)
 		return (ERROR);
-        show_header(elf, (Elf64_Shdr *)((void *)elf + elf->e_shoff), file);
-	show_sections(elf, (Elf64_Shdr *)((void *)elf + elf->e_shoff));
+	show_header(elf, (void *)elf + elf->e_shoff, file);
+	show_sections(elf, (void *)elf + elf->e_shoff);
 	return (SUCCESS);
 }
 

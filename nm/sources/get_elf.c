@@ -13,34 +13,39 @@ int filesize(int fd)
 	return (lseek(fd, 0, SEEK_END));
 }
 
-bool is_elf_file(const Elf64_Ehdr *ehdr)
+bool is_elf_file(void *datas, const char *file, unsigned int size)
 {
-        return (ehdr->e_ident[0] == ELFMAG0 &&
-                ehdr->e_ident[1] == ELFMAG1 &&
-                ehdr->e_ident[2] == ELFMAG2 &&
-                ehdr->e_ident[3] == ELFMAG3 &&
-                ehdr->e_ident[4] == ELFCLASS64);
+	Elf64_Ehdr *ehdr = (Elf64_Ehdr *)datas;
+	Elf64_Shdr *shdr = (Elf64_Shdr *)(datas + ehdr->e_shoff);
+
+	if (!(IS_ELF64(ehdr->e_ident)))
+		return (fprintf(stderr,
+				"my_nm: %s: File format not recognized\n",
+				file), false);
+	if ((void *)&(shdr[0]) > (void *)datas + size)
+		return (fprintf(stderr, "my_nm: %s: File truncated\n",
+				file), false);
+	return (true);
 }
 
 Elf64_Ehdr *get_elf_header(const char *file)
 {
 	int fd;
 	void *datas;
-	Elf64_Ehdr *elf;
+	unsigned int size;
 
 	fd = open(file, O_RDONLY);
 	if (fd == OPEN_ERROR)
-		return (dprintf(2, "nm: '%s': No such file\n", file), NULL);
-	datas = mmap(NULL, filesize(fd), PROT_READ, MAP_SHARED, fd, 0);
+		return (fprintf(stderr, "my_nm: '%s': No such file\n",
+				file), NULL);
+	size = filesize(fd);
+	datas = mmap(NULL, size, PROT_READ, MAP_SHARED, fd, 0);
 	if (datas == MAP_FAILED)
 		return (perror("mmap"), NULL);
-	elf = (Elf64_Ehdr *)datas;
 	close(fd);
-	if (is_elf_file(elf) == false) {
-		dprintf(2, "nm: %s: File format not recognized\n", file);
+	if (is_elf_file(datas, file, size) == false)
 		return (NULL);
-	}
-	return (elf);
+	return ((Elf64_Ehdr *)datas);
 }
 
 static t_symbol *fill_symarr(const Elf64_Shdr *shdr, const Elf64_Sym *sym,
