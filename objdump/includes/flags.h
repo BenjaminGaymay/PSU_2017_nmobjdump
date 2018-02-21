@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2018
+** objdump
+** File description:
+** flags
+*/
+
 #ifndef __BFD_H_SEEN__
 #define __BFD_H_SEEN__
 

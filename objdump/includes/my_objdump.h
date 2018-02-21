@@ -28,6 +28,29 @@ typedef struct s_machine {
         const char *name;
 } t_machine;
 
+static const t_machine machine[] =
+{
+        {EM_M32, "AT&T WE 32100"},
+        {EM_SPARC, "Sun Microsystems SPARC"},
+        {EM_386, "Intel 80386"},
+        {EM_68K, "Motorola 68000"},
+        {EM_88K, "Motorola 88000"},
+        {EM_860, "Intel 80860"},
+        {EM_MIPS, "MIPS RS3000"},
+        {EM_PARISC, "HP/PA"},
+        {EM_SPARC32PLUS, "SPARC"},
+        {EM_PPC, "PowerPC"},
+        {EM_PPC64, "PowerPC 64-bit"},
+        {EM_S390, "IBM S/390"},
+        {EM_ARM, "Advanced RISC Machines"},
+        {EM_SH, "Renesas SuperH"},
+        {EM_SPARCV9, "SPARC v9 64-bit"},
+        {EM_IA_64, "Intel Itanium"},
+        {EM_X86_64, "i386:x86-64"},
+        {EM_VAX, "DEC Vax"},
+        {EM_NONE, "unknown"}
+};
+
 bool is_elf_file(const Elf64_Ehdr *);
 Elf64_Ehdr *get_elf_header(const char *);
 int show_sections(const Elf64_Ehdr *, const Elf64_Shdr *);

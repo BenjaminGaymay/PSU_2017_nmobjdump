@@ -7,14 +7,14 @@
 
 #include "my_objdump.h"
 
-static int start_objdump(const char *file_name)
+static int start_objdump(const char *file)
 {
 	Elf64_Ehdr *elf;
 
-	elf = get_elf_header(file_name);
+	elf = get_elf_header(file);
 	if (elf == NULL)
 		return (ERROR);
-        show_header(elf, (Elf64_Shdr *)((void *)elf + elf->e_shoff), file_name);
+        show_header(elf, (Elf64_Shdr *)((void *)elf + elf->e_shoff), file);
 	show_sections(elf, (Elf64_Shdr *)((void *)elf + elf->e_shoff));
 	return (SUCCESS);
 }
