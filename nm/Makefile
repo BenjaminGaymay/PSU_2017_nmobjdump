@@ -1,3 +1,10 @@
+##
+## EPITECH PROJECT, 2018
+## nm
+## File description:
+## Makefile
+##
+
 NAME	= my_nm
 
 CC	= gcc

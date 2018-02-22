@@ -1,3 +1,10 @@
+##
+## EPITECH PROJECT, 2018
+## objdump
+## File description:
+## Makefile
+##
+
 NAME	= my_objdump
 
 CC	= gcc
