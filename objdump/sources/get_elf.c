@@ -74,17 +74,17 @@ static void print_line_datas(const Elf64_Ehdr *elf, const Elf64_Shdr *shdr,
 int show_sections(const Elf64_Ehdr *elf, const Elf64_Shdr *shdr)
 {
 	char *strtab = (char *)((void *)elf + shdr[elf->e_shstrndx].sh_offset);
-	char *section;
+	char *sec;
 	unsigned int size;
 	unsigned int offset;
 
 	for (int i = 0 ; i < elf->e_shnum ; i++) {
-		section = &strtab[shdr[i].sh_name];
-		if (strlen(section) > 0 && (strcmp(section, ".dynstr") == 0 ||
+		sec = &strtab[shdr[i].sh_name];
+		if (strlen(sec) > 0 && (strcmp(sec, ".dynstr") == 0 ||
                     GOOD_SECTION(shdr[i].sh_type))) {
 			offset = shdr[i].sh_offset;
 			size = offset + shdr[i].sh_size;
-			printf("Contents of section %s:\n", section);
+			printf("Contents of section %s:\n", sec);
 			for (unsigned int j = offset ; j < size ; j += 16)
 				print_line_datas(elf, shdr, i, j - offset);
 		}

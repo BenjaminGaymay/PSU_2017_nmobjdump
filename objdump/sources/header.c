@@ -28,11 +28,11 @@ static int get_flags(const Elf64_Ehdr *elf, const Elf64_Shdr *shdr, char **str)
 	return (flags | HAS_SYMS);
 }
 
-static const char *find_machine(uint16_t id)
+static const char *find_arch(uint16_t id)
 {
-	for (int i = 0 ; machine[i].name ; i++) {
-		if (machine[i].id == id)
-			return (machine[i].name);
+	for (int i = 0 ; g_arch[i].name ; i++) {
+		if (g_arch[i].id == id)
+			return (g_arch[i].name);
 	}
 	return ("unknown");
 }
@@ -43,7 +43,7 @@ void show_header(const Elf64_Ehdr *elf, const Elf64_Shdr *shdr,
 	char *str = NULL;
 
 	printf("\n%s:     file format elf64-x86-64\n", file);
-	printf("architecture: %s, ", find_machine(elf->e_machine));
+	printf("architecture: %s, ", find_arch(elf->e_machine));
 	printf("flags 0x%08x:\n", get_flags(elf, shdr, &str));
 	printf("%s\nstart address 0x%016lx\n\n", str, elf->e_entry);
 }

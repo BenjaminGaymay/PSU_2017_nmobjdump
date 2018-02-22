@@ -28,12 +28,12 @@
 			     (type) != SHT_STRTAB && \
 			     (type) != SHT_NOBITS)
 
-typedef struct s_machine {
+typedef struct s_arch {
 	uint16_t id;
 	const char *name;
-} t_machine;
+} t_arch;
 
-static const t_machine machine[] =
+static const t_arch g_arch[] =
 {
 	{EM_M32, "AT&T WE 32100"},
 	{EM_SPARC, "Sun Microsystems SPARC"},
