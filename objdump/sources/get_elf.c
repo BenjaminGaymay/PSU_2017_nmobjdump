@@ -81,7 +81,7 @@ int show_sections(const Elf64_Ehdr *elf, const Elf64_Shdr *shdr)
 	for (int i = 0 ; i < elf->e_shnum ; i++) {
 		sec = &strtab[shdr[i].sh_name];
 		if (strlen(sec) > 0 && (strcmp(sec, ".dynstr") == 0 ||
-                    GOOD_SECTION(shdr[i].sh_type))) {
+					GOOD_SECTION(shdr[i].sh_type))) {
 			offset = shdr[i].sh_offset;
 			size = offset + shdr[i].sh_size;
 			printf("Contents of section %s:\n", sec);
