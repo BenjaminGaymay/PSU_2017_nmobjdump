@@ -49,7 +49,7 @@ Elf64_Ehdr *get_elf_header(const char *file)
 }
 
 static t_symbol *fill_symarr(const Elf64_Shdr *shdr, const Elf64_Sym *sym,
-			     const Elf64_Sym *symend, char *symstr)
+				const Elf64_Sym *symend, char *symstr)
 {
 	int index = 0;
 	t_symbol *symarr;
@@ -59,11 +59,11 @@ static t_symbol *fill_symarr(const Elf64_Shdr *shdr, const Elf64_Sym *sym,
 		return (perror("calloc"), NULL);
 	while (sym && symend && sym < symend) {
 		if (sym->st_info != STT_FILE &&
-		    sym->st_info != STT_SECTION &&
-		    strlen(&symstr[sym->st_name]) > 0) {
-			symarr[index] = (t_symbol){sym->st_value,
-						   &symstr[sym->st_name],
-						   get_symtype(sym, shdr)};
+			sym->st_info != STT_SECTION &&
+			strlen(&symstr[sym->st_name]) > 0) {
+				symarr[index] = (t_symbol){sym->st_value,
+					&symstr[sym->st_name],
+					get_symtype(sym, shdr)};
 			index++;
 		}
 		sym++;
@@ -80,10 +80,9 @@ t_symbol *get_symarr(const Elf64_Ehdr *elf, const Elf64_Shdr *shdr)
 	for (int i = 0 ; i < elf->e_shnum ; i++) {
 		if (shdr[i].sh_type == SHT_SYMTAB) {
 			symstr = (char *)((void *)elf +
-					  shdr[shdr[i].sh_link].sh_offset);
+				shdr[shdr[i].sh_link].sh_offset);
 			sym = (Elf64_Sym *)((void *)elf + shdr[i].sh_offset);
-			symend = (Elf64_Sym *)((void *)sym +
-					       shdr[i].sh_size);
+			symend = (Elf64_Sym *)((void *)sym + shdr[i].sh_size);
 			break;
 		}
 	}

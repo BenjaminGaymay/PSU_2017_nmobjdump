@@ -19,14 +19,14 @@
 # define FAILURE 1
 # define ERROR 84
 # define OPEN_ERROR -1
-# define IS_ELF64(e_ident) (e_ident[0] == ELFMAG0 &&	\
-			    e_ident[1] == ELFMAG1 &&	\
-			    e_ident[2] == ELFMAG2 &&	\
-			    e_ident[3] == ELFMAG3 &&	\
-			    e_ident[4] == ELFCLASS64)
-# define GOOD_SECTION(type) ((type) != SHT_SYMTAB && \
-			     (type) != SHT_STRTAB && \
-			     (type) != SHT_NOBITS)
+# define IS_ELF64(e_ident) (e_ident[0] == ELFMAG0 &&		\
+				e_ident[1] == ELFMAG1 &&	\
+				e_ident[2] == ELFMAG2 &&	\
+				e_ident[3] == ELFMAG3 &&	\
+				e_ident[4] == ELFCLASS64)
+# define GOOD_SECTION(type) ((type) != SHT_SYMTAB &&	\
+				(type) != SHT_STRTAB &&	\
+				(type) != SHT_NOBITS)
 
 typedef struct s_arch {
 	uint16_t id;

@@ -40,8 +40,8 @@ t_symbol *alphanum_sort(t_symbol *array)
 	for (size_t i = 0 ; array[i].name ; i++) {
 		for (size_t f = 0 ; array[f].name ; f++) {
 			if (array[f + 1].name &&
-			    alphanum_comp(array[f].name,
-					  array[f + 1].name) == true) {
+				alphanum_comp(array[f].name,
+					array[f + 1].name) == true) {
 				tmp = array[f];
 				array[f] = array[f + 1];
 				array[f + 1] = tmp;

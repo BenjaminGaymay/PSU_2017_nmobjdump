@@ -38,7 +38,7 @@ static const char *find_arch(uint16_t id)
 }
 
 void show_header(const Elf64_Ehdr *elf, const Elf64_Shdr *shdr,
-		 const char *file)
+			const char *file)
 {
 	char *str = NULL;
 

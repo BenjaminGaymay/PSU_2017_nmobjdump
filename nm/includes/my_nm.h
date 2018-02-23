@@ -19,11 +19,11 @@
 # define FAILURE 1
 # define ERROR 84
 # define OPEN_ERROR -1
-# define IS_ELF64(e_ident) (e_ident[0] == ELFMAG0 &&	\
-			    e_ident[1] == ELFMAG1 &&	\
-			    e_ident[2] == ELFMAG2 &&	\
-			    e_ident[3] == ELFMAG3 &&	\
-			    e_ident[4] == ELFCLASS64)
+# define IS_ELF64(e_ident) (e_ident[0] == ELFMAG0 &&		\
+				e_ident[1] == ELFMAG1 &&	\
+				e_ident[2] == ELFMAG2 &&	\
+				e_ident[3] == ELFMAG3 &&	\
+				e_ident[4] == ELFCLASS64)
 
 typedef struct s_symbol {
 	long unsigned int addr;

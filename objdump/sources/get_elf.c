@@ -49,7 +49,7 @@ Elf64_Ehdr *get_elf_header(const char *file)
 }
 
 static void print_line_datas(const Elf64_Ehdr *elf, const Elf64_Shdr *shdr,
-			     int i, int index)
+	int i, int index)
 {
 	unsigned char *data = (unsigned char *)elf + shdr[i].sh_offset + index;
 	int size = shdr[i].sh_size - index;

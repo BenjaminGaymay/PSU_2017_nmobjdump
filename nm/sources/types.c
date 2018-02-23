@@ -19,7 +19,7 @@ static char checktype_shdr(const Elf64_Sym *sym, const Elf64_Shdr *shdr)
 
 	for (int i = 0 ; arr[i].type ; i++) {
 		if (shdr[sym->st_shndx].sh_type == (unsigned int)arr[i].fst &&
-		    shdr[sym->st_shndx].sh_flags == (unsigned int)arr[i].sec)
+		shdr[sym->st_shndx].sh_flags == (unsigned int)arr[i].sec)
 			return (arr[i].type);
 	}
 	return (shdr[sym->st_shndx].sh_type == SHT_DYNAMIC ? 'D' : 't');
@@ -50,7 +50,7 @@ static char checktype_info(const Elf64_Sym *sym, const Elf64_Shdr *shdr)
 
 	for (int i = 0 ; arr[i].type ; i++) {
 		if (ELF64_ST_BIND(sym->st_info) == arr[i].fst &&
-		    ELF64_ST_BIND(sym->st_info) == arr[i].sec)
+			ELF64_ST_BIND(sym->st_info) == arr[i].sec)
 			return (arr[i].type);
 	}
 	return (checktype_shndx(sym, shdr));
@@ -61,9 +61,9 @@ char get_symtype(const Elf64_Sym *sym, const Elf64_Shdr *shdr)
 	char type = checktype_info(sym, shdr);
 
 	if (((type == 'V' || type == 'W') &&
-	     sym->st_shndx == SHN_UNDEF) ||
-	    (type != 't' &&
-	     ELF64_ST_BIND(sym->st_info) == STB_LOCAL))
+		sym->st_shndx == SHN_UNDEF) ||
+		(type != 't' &&
+		ELF64_ST_BIND(sym->st_info) == STB_LOCAL))
 		type += 32;
 	return (type);
 }
